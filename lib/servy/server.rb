@@ -1,7 +1,8 @@
 module Servy
   class Server
-    def initialize(host, port)
+    def initialize(host, port, handler)
       @socket = TCPServer.new(host, port)
+      @handler = handler
     end
     
     def start
@@ -13,7 +14,7 @@ module Servy
     def run_once
       connection = @socket.accept
       request = Request.new(@connection)
-      response = Response.new(request)
+      response = Response.new(request, @handler.new)
       ResponseOutputter.new.output(connection, response)
       connection.close
     end

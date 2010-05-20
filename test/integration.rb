@@ -1,10 +1,15 @@
 require File.join(File.dirname(__FILE__), 'test_helper')
 
 class IntegrationTests < Testy::TestSuite
+  class HelloWorldHandler
+    def accept(request)
+      [200, {}, "Hello world"]
+    end
+  end
   def test_returns_hello_world
     thread = Thread.new do
       begin
-        Servy::Server.new("localhost", 9999).start
+        Servy::Server.new("localhost", 9999, HelloWorldHandler).start
       rescue Exception => e
         puts e.inspect
       end
