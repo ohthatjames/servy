@@ -1,7 +1,4 @@
-require 'rubygems'
-require 'testy'
-require 'socket'
-require File.join(File.dirname(__FILE__), '..', 'lib', 'servy')
+require File.join(File.dirname(__FILE__), 'test_helper')
 
 class IntegrationTests < Testy::TestSuite
   def test_returns_hello_world
