@@ -1,5 +1,3 @@
-require 'socket'
-
 module Servy
   class Server
     def initialize(host, port)
@@ -19,8 +17,4 @@ module Servy
       @connection.close
     end
   end
-end
-
-if __FILE__ == $0
-  Servy::Server.new("localhost", 3000).start
 end
