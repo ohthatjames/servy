@@ -49,10 +49,16 @@ module Servy
     
     def output(connection, response)
       status = status_for(response.status)
-      connection.print("HTTP/1.1 #{status}\r\n\r\n#{response.body}\r\n")
+      connection.print("HTTP/1.1 #{status}\r\n#{header_list(response.headers)}\r\n#{response.body}\r\n")
     end
     
     private
+    def header_list(headers)
+      headers.map do |key, value|
+        "#{key}: #{value}\r\n"
+      end
+    end
+    
     def status_for(code)
       "#{code} #{STATUS_CODES[code.to_i]}"
     end

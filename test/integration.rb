@@ -3,7 +3,7 @@ require File.join(File.dirname(__FILE__), 'test_helper')
 class IntegrationTests < Testy::TestSuite
   class HelloWorldHandler
     def accept(request)
-      [200, {}, "Hello world"]
+      [200, {"Foo" => "Bar", "A" => "B"}, "Hello world"]
     end
   end
   def test_returns_hello_world
@@ -17,7 +17,7 @@ class IntegrationTests < Testy::TestSuite
     socket = TCPSocket.open("localhost", 9999)
     socket.print("GET /foo HTTP/1.1\r\n\r\n")
     response = socket.read
-    assert_equal("HTTP/1.1 200 OK\r\n\r\nHello world\r\n", response)
+    assert_equal("HTTP/1.1 200 OK\r\nA: B\r\nFoo: Bar\r\n\r\nHello world\r\n", response)
   ensure
     thread.kill
     socket.close
