@@ -12,7 +12,7 @@ module Servy
     
     def run_once
       @connection = @socket.accept
-      request = @connection.gets
+      request = Request.new(@connection)
       @connection.print("HTTP/1.1 200 OK\r\n\r\nHello world\r\n")
       @connection.close
     end
