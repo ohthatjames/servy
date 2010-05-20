@@ -5,5 +5,10 @@ task :default => :test
 
 desc "Run tests"
 task :test do
-  Testy::TestRunner.new(File.join(File.dirname(__FILE__), 'test')).run
+  if ENV["FILE"]
+    require File.join(File.dirname(__FILE__), ENV["FILE"])
+    Testy::TestSuiteRunner.new(Testy::TestSuite.registered_suites).run
+  else
+    Testy::TestRunner.new(File.join(File.dirname(__FILE__), 'test')).run
+  end
 end
