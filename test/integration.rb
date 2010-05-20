@@ -7,7 +7,7 @@ class IntegrationTests < Testy::TestSuite
   def test_returns_hello_world
     thread = Thread.new do
       begin
-        server = Servy::Server.new("localhost", 9999)
+        Servy::Server.new("localhost", 9999).start
       rescue Exception => e
         puts e.inspect
       end

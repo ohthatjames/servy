@@ -4,6 +4,9 @@ module Servy
   class Server
     def initialize(host, port)
       @socket = TCPServer.new(host, port)
+    end
+    
+    def start
       while true
         @connection = @socket.accept
         request = @connection.gets
@@ -15,5 +18,5 @@ module Servy
 end
 
 if __FILE__ == $0
-  Servy::Server.new("localhost", 3000)
+  Servy::Server.new("localhost", 3000).start
 end
