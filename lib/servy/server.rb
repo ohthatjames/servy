@@ -11,10 +11,11 @@ module Servy
     end
     
     def run_once
-      @connection = @socket.accept
+      connection = @socket.accept
       request = Request.new(@connection)
-      @connection.print("HTTP/1.1 200 OK\r\n\r\nHello world\r\n")
-      @connection.close
+      response = Response.new(request)
+      ResponseOutputter.new.output(connection, response)
+      connection.close
     end
   end
 end
