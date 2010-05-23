@@ -13,7 +13,7 @@ module Servy
     
     def run_once
       connection = @socket.accept
-      request = Request.new(@connection)
+      request = Request.new(connection)
       response = Response.new(request, @handler.new)
       ResponseOutputter.new.output(connection, response)
       connection.close
