@@ -4,6 +4,7 @@ require 'servy/server'
 require 'servy/request'
 require 'servy/response'
 require 'servy/response_outputter'
+require 'servy/file_handler'
 
 if __FILE__ == $0
   Servy::Server.new("localhost", 3000).start

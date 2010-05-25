@@ -9,6 +9,6 @@ task :test do
     require File.join(File.dirname(__FILE__), ENV["FILE"])
     Testy::TestSuiteRunner.new(Testy::TestSuite.registered_suites).run
   else
-    Testy::TestRunner.new(File.join(File.dirname(__FILE__), 'test')).run
+    Testy::TestRunner.new(File.join(File.dirname(__FILE__), 'test', 'servy')).run
   end
 end
