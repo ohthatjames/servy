@@ -29,7 +29,7 @@ class ResponseOutputterTest < Testy::TestSuite
   
   def test_returns_headers
     response = Servy::Response.new(:request, @handler)
-    assert_equal({"foo" => "bar"}, response.headers)
+    assert_equal({"foo" => "bar", "Content-Length" => 4}, response.headers)
   end
   
   def test_returns_body

@@ -11,15 +11,10 @@ class IntegrationTests < Testy::TestSuite
     end
   end
   
-  # def test_returns_hello_world
-    # response = make_request(HelloWorldHandler, {}, "GET /foo HTTP/1.1\r\nUser-Agent: Me\r\n\r\n")
-    # assert_equal("HTTP/1.1 200 OK\r\nA: B\r\nFoo: Bar\r\n\r\nHello world\r\n", response)
-  # end
-  
   def test_file_handler
     document_root = File.expand_path(File.join(File.dirname(__FILE__), '..', 'document_root'))
     response = make_request(Servy::FileHandler, {:document_root => document_root}, "GET /index.html HTTP/1.1\r\nUser-Agent: Me\r\n\r\n")
-    assert_equal("HTTP/1.1 200 OK\r\n\r\nThis is the index file\r\n", response)
+    assert_equal("HTTP/1.1 200 OK\r\nContent-Length: 22\r\n\r\nThis is the index file\r\n", response)
   end
   
   def make_request(handler, options, request)
