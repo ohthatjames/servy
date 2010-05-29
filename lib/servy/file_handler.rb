@@ -9,6 +9,7 @@ module Servy
     
     def accept(request)
       file_path = File.join(document_root, request.request_uri)
+      file_path = File.join(file_path, 'index.html') if File.directory?(file_path)
       if File.exists?(file_path)
         [200, {}, File.read(file_path)]
       else
